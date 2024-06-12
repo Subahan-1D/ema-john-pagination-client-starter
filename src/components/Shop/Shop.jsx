@@ -7,11 +7,11 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([])
-    const [itemsPerPage, setItemsPerPage] = useState(10)
-    const [currentPage, setCurrentPage] = useState(0)
+    const [cart, setCart] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
     const { count } = useLoaderData();
-    const numbersOfPerPage = Math.ceil(count / itemsPerPage)
+    const numbersOfPerPage = Math.ceil(count / itemsPerPage);
     // const pages = []
     // for (let i = 0; i < numbersOfPerPage; i++) {
     //     pages.push(i)
@@ -21,7 +21,7 @@ const Shop = () => {
     console.log(pages);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products?page${currentPage} $ size = ${itemsPerPage}`)
+        fetch(`http://localhost:5000/products?page=${currentPage}$size=${itemsPerPage}`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [currentPage, itemsPerPage]);
@@ -116,7 +116,7 @@ const Shop = () => {
                 <button onClick={handlePreviousPage}>Previous</button>
                 {
                     pages.map(page => <button 
-                        className={currentPage === page && 'selected'} onClick={() => (setCurrentPage(page))} key={page}>{page}</button>)
+                        className={currentPage === page ? 'selected': undefined} onClick={() => (setCurrentPage(page))} key={page}>{page}</button>)
                 }
                 <select value={itemsPerPage} onChange={handleItemsPerPage} name="" id="">
                     <option value="5">5</option>
